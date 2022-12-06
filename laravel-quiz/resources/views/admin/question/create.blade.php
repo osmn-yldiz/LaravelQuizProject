@@ -1,0 +1,82 @@
+<x-app-layout>
+    <x-slot name="header">{{$quiz->title}} Soru Oluştur</x-slot>
+    <div class="card">
+        <div class="card-body">
+            <div class="float-end mb-2"><a href="{{route('questions.index', $quiz->id)}}"
+                                           class="btn btn-primary btn-md"><i
+                        class="fa-solid fa-arrow-left"></i> Geri
+                    Dön</a></div>
+            <form method="POST" action="{{route('questions.store', $quiz->id)}}" enctype="multipart/form-data">
+                @csrf
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Soru</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                              name="question">{{old('question')}}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Fotoğraf</label>
+                    <input class="form-control" type="file" id="formFile" name="image">
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">1. Cevap</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"
+                                      name="answer1">{{old('answer1')}}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">2. Cevap</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"
+                                      name="answer2">{{old('answer2')}}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">3. Cevap</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"
+                                      name="answer3">{{old('answer3')}}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">4. Cevap</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"
+                                      name="answer4">{{old('answer4')}}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Doğru Cevap</label>
+                    <select class="form-select" aria-label="Default select example" name="correct_answer">
+                        <option selected>Doğru Seçeneği Seçiniz...</option>
+                        <option @if(old('correct_answer') === 'answer1') selected @endif value="answer1">1. Cevap
+                        </option>
+                        <option @if(old('correct_answer') === 'answer2') selected @endif value="answer2">2. Cevap
+                        </option>
+                        <option @if(old('correct_answer') === 'answer3') selected @endif value="answer3">3. Cevap
+                        </option>
+                        <option @if(old('correct_answer') === 'answer4') selected @endif value="answer4">4. Cevap
+                        </option>
+                    </select>
+                </div>
+
+                <div class="d-grid gap-2 col-2 mx-auto">
+                    <button class="btn btn-success btn-md" style="background-color: #198754" type="submit">Soru
+                        Oluştur
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</x-app-layout>
